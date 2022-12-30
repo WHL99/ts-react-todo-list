@@ -1,0 +1,78 @@
+body {
+  margin: 0;
+  padding: 0;
+}
+
+.App {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  width: 100vw;
+  height: 100vh;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.header {
+  flex: 20%;
+  background-color: rgb(127, 159, 221);
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.todoList {
+  flex: 80%;
+  background-color: rgb(184, 235, 218);
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.task {
+  width: 500px;
+  /* width: 32%; */
+
+  height: 50px;
+  display: flex;
+  background-color: rgb(222, 123, 123);
+  margin: 10px;
+}
+
+.task .content {
+  flex: 80%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.task .content span {
+  width: 100%;
+  padding-left: 12px;
+  color: white;
+  display: grid;
+  justify-items: center;
+}
+
+button {
+  outline: none;
+  background-color: rgb(123, 230, 230);
+  border: 0.3em solid rgb(222, 123, 123);
+  padding: 15px;
+}
+
+.inputContainer input {
+  padding: 15px;
+  border: 0.3em solid rgb(222, 123, 123);
+  border-right: none;
+  outline: none;
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
