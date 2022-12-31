@@ -2,7 +2,7 @@ import React, { ChangeEvent, FC, useState, useEffect } from "react";
 import "./App.css";
 
 import { TL } from "./interfaces";
-import { TodoTask } from "./components/TodoTask";
+import { TodoList } from "./components/TodoList";
 
 // function App() {
 const App: FC = () => {
@@ -35,7 +35,12 @@ const App: FC = () => {
   };
 
   const handleAdd = (): void => {
-    const newTask = { taskName: task, taskDeadline: deadline };
+    const newTask = {
+      id: crypto.randomUUID(),
+      taskName: task,
+      taskDeadline: deadline,
+      completed: false,
+    };
     setTodoList((prev) => {
       return [...prev, newTask];
     });
@@ -44,11 +49,20 @@ const App: FC = () => {
   };
 
   const completeTask = (taskToDelete: string): void => {
-    setTodoList(
-      todoList.filter((task) => {
-        return task.taskName !== taskToDelete;
-      })
-    );
+    const newTask = todoList.filter((task) => {
+      return task.id !== taskToDelete;
+    });
+    setTodoList(newTask);
+  };
+
+  const toggleBox = (taskToToggle: string): void => {
+    const newTask = [...todoList];
+    const task = newTask.find((task) => {
+      return task.id === taskToToggle;
+    });
+    if (task === undefined) return;
+    task.completed = !task.completed;
+    setTodoList(newTask);
   };
 
   return (
@@ -74,8 +88,15 @@ const App: FC = () => {
         <button onClick={handleAdd}>Add</button>
       </div>
       <div className="todoList">
-        {todoList.map((task: TL, i: number) => {
-          return <TodoTask key={i} task={task} completeTask={completeTask} />;
+        {todoList.map((task: TL) => {
+          return (
+            <TodoList
+              key={crypto.randomUUID()}
+              task={task}
+              completeTask={completeTask}
+              toggleBox={toggleBox}
+            />
+          );
         })}
       </div>
     </div>
