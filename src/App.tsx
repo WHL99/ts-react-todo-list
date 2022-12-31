@@ -12,6 +12,18 @@ const App: FC = () => {
 
   const LOCAL_STORAGE_KEY = "MYTODOLIST";
 
+  useEffect(() => {
+    //https://stackoverflow.com/questions/67700374/use-localstorage-getitem-with-typescript
+    const storedTasks = JSON.parse(
+      localStorage.getItem(LOCAL_STORAGE_KEY) || ""
+    );
+    if (storedTasks) setTodoList(storedTasks);
+  }, []);
+
+  useEffect(() => {
+    localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(todoList));
+  }, [todoList]);
+
   //const handleChange = (e)=>{
   const handleChange = (e: ChangeEvent<HTMLInputElement>): void => {
     if (e.target.name === "task") {
@@ -27,7 +39,6 @@ const App: FC = () => {
     setTodoList((prev) => {
       return [...prev, newTask];
     });
-
     setTask("");
     setDeadline(0);
   };
